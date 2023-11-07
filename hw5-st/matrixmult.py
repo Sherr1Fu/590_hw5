@@ -3,13 +3,13 @@
 # Note: you may not use any matrix multiplication libraries.
 # You need to do the multiplication yourself.
 # For example, if you have
-#     a=[[1,2,3],
-#        [4,5,6],
-#        [7,8,9],
-#        [4,0,7]]
-#     b=[[1,2],
-#        [3,4],
-#        [5,6]]
+    # a=[[1,2,3],
+    #    [4,5,6],
+    #    [7,8,9],
+    #    [4,0,7]]
+    # b=[[1,2],
+    #    [3,4],
+    #    [5,6]]
 #  Then a has 4 rows and 3 columns.
 #  b has 3 rows and 2 columns.
 #  Multiplying a * b results in a 4 row, 2 column matrix:
@@ -23,6 +23,9 @@ from collections import deque
 
 def matrix_mul(a,b):
     # Write me
+    if len(a[0])!=len(b):
+        raise ValueError("Incompatible matrix \
+                         dimensions for multiplication")
     result=[[0 for i in range(len(b[0]))]\
              for j in range (len(a))]
     for i in range(len(a)):
@@ -36,13 +39,15 @@ if __name__ == "__main__":
     for size in sizes:
         result=[]
         result.append(size)
-        square_morerows=[[random.random() for i in range (0,size)] for j in range (0,size*4)]
-        square_morecols=[[random.random() for i in range (0,size*4)] for j in range (0,size)]
+        square_morerows1=[[random.random() for i in range (0,size)] for j in range (0,size*4)]
+        square_morerows2=[[random.random() for i in range (0,size//4)] for j in range (0,size)]
+        square_morecols1=[[random.random() for i in range (0,size)] for j in range (0,size//4)]
+        square_morecols2=[[random.random() for i in range (0,size*4)] for j in range (0,size)]
         square_N1=[[random.random() for i in range (0,size)] for j in range (0,size)]
         square_N2=[[random.random() for i in range (0,size)] for j in range (0,size)]
         #print(data)
         start=time.time()
-        matrix_mul(square_morerows,square_morecols)
+        matrix_mul(square_morerows1,square_morerows2)
         end=time.time()
         runtime=end-start
         result.append(runtime)
@@ -54,7 +59,7 @@ if __name__ == "__main__":
         result.append(runtime)
         #
         start=time.time()
-        matrix_mul(square_morecols,square_morerows)
+        matrix_mul(square_morecols1,square_morecols2)
         end=time.time()
         runtime=end-start
         result.append(runtime)
