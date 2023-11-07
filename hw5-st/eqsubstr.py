@@ -78,17 +78,16 @@ def rndstr(n):
     return "".join(ans)
 
 def best(n):
-    return 'a'*(n//2)+'b'*(n//2)
+    return 'a'*(n//2)+'b'*(n-n//2)
 
 def worst(n):
-    return 'ab'*(n//2)
+    return 'ab'*(n//2)+'a'*(n-n//2*2)
 
 if __name__ == "__main__":
     strgens=[best,worst,rndstr]
     #strgens=[best]
     sizes = [2**i for i in range(9, 15)]
-    #sizes = [2**i for i in range(9, 13)]
-    #sizes = [2**i for i in range(5,6)]
+    print(worst(3))
     for size in sizes:
         result=[]
         result.append(size)
